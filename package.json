@@ -1,0 +1,23 @@
+{
+  "name": "backend-hs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Vanessa Fuangi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.1.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.3",
+    "slugify": "^1.6.6",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "express": "^4.18.2"
+  }
+}
