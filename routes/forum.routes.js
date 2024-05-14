@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.route("/").get();
+router.route("/").get().post();
 
 router.route("/:id").get().patch().delete();
 
