@@ -1,3 +1,4 @@
+const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
@@ -15,6 +16,15 @@ const app = express();
 
 // MIDDLEWARES
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    method: "POST PATCH GET DELETE",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  })
+);
 
 // Serving static files
 app.use(express.static(path.join(__dirname, "public")));

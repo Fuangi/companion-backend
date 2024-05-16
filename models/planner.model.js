@@ -20,7 +20,7 @@ const plannerSchema = new mongoose.Schema({
   },
   eventEnd: {
     type: Date,
-    required: [true, "You must provide an time for the event"],
+    required: [true, "You must provide an end time for the event"],
   },
 });
 
