@@ -8,6 +8,7 @@ const userRouter = require("./routes/user.routes");
 const resourceRouter = require("./routes/resource.routes");
 const forumRouter = require("./routes/forum.routes");
 const plannerRouter = require("./routes/planner.routes");
+const goalRouter = require("./routes/goal.routes");
 
 // Utilities
 const AppError = require("./utils/appError");
@@ -39,6 +40,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/forums", forumRouter);
 app.use("/api/v1/plans", plannerRouter);
 app.use("/api/v1/resources", resourceRouter);
+app.use("/api/v1/goals", goalRouter);
 
 // Handline unhandled routes
 app.all("*", (req, res, next) => {
