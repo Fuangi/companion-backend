@@ -13,7 +13,6 @@ const goalSchema = new mongoose.Schema({
       "You must provide the category you want the goal to be in",
     ],
   },
-  color: String,
 });
 
 const Goal = mongoose.model("Goal", goalSchema);
