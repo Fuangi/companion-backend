@@ -1,4 +1,3 @@
-const catchAsync = require("../utils/catchAsync");
 const Planner = require("../models/planner.model");
 const factory = require("./handlerFactory");
 
