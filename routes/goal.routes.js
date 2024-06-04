@@ -1,17 +1,18 @@
 const express = require("express");
 const goalController = require("../controllers/goalController");
+const authController = require("../controllers/authController");
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(goalController.getAllGoals)
-  .post(goalController.createGoal);
+  .get(authController.protect, goalController.getAllGoals)
+  .post(authController.protect, goalController.createGoal);
 
 router
   .route("/:id")
-  .get(goalController.getGoal)
-  .patch(goalController.updateGoal)
-  .delete(goalController.deleteGoal);
+  .get(authController.protect, goalController.getGoal)
+  .patch(authController.protect, goalController.updateGoal)
+  .delete(authController.protect, goalController.deleteGoal);
 
 module.exports = router;
