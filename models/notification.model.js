@@ -1,8 +1,14 @@
 const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema({
-  message: String,
-  schedule: String,
+  message: {
+    type: String,
+    required: true,
+  },
+  schedule: {
+    type: String,
+    required: true,
+  },
   active: Boolean, //to store it will be true if uer has it on or false otherwise
   lastSent: Date,
 });

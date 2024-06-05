@@ -2,7 +2,21 @@ const Notification = require("../models/notification.model");
 const factory = require("./handlerFactory");
 const cron = require("node-cron");
 
-exports.createNotification = factory.createOne(Notification);
+exports.createNotification = async (req, res) => {
+  const { message, schedule } = req.body;
+  const notification = await Notification.create({
+    message,
+    schedule,
+    active: true,
+  });
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      data: notification,
+    },
+  });
+};
 
 exports.updateNotification = factory.updateOne(Notification);
 
