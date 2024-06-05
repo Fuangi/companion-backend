@@ -2,6 +2,8 @@ const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const cron = require("node-cron");
 
 // Routes handlers
 const userRouter = require("./routes/user.routes");
@@ -30,10 +32,19 @@ app.use(
 // Serving static files
 app.use(express.static(path.join(__dirname, "public")));
 
+/* cron.schedule("30 * * * *", () => {
+  console.log("running a task every 30 minutes");
+}); */
+
 // Development logging
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+// Body parser, reading data from body into req.body
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+app.use(cookieParser());
 
 // ROUTES
 app.use("/api/v1/users", userRouter);
