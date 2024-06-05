@@ -3,7 +3,6 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const cron = require("node-cron");
 
 // Routes handlers
 const userRouter = require("./routes/user.routes");
@@ -11,6 +10,7 @@ const resourceRouter = require("./routes/resource.routes");
 const forumRouter = require("./routes/forum.routes");
 const plannerRouter = require("./routes/planner.routes");
 const goalRouter = require("./routes/goal.routes");
+const notifRouter = require("./routes/notification.routes");
 
 // Utilities
 const AppError = require("./utils/appError");
@@ -32,10 +32,6 @@ app.use(
 // Serving static files
 app.use(express.static(path.join(__dirname, "public")));
 
-/* cron.schedule("30 * * * *", () => {
-  console.log("running a task every 30 minutes");
-}); */
-
 // Development logging
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -52,6 +48,7 @@ app.use("/api/v1/forums", forumRouter);
 app.use("/api/v1/plans", plannerRouter);
 app.use("/api/v1/resources", resourceRouter);
 app.use("/api/v1/goals", goalRouter);
+app.use("/api/v1/notifications", notifRouter);
 
 // Handline unhandled routes
 app.all("*", (req, res, next) => {
