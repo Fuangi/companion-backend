@@ -18,6 +18,7 @@ exports.deleteOne = (Model) =>
 
 exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
+    console.log(req.params, req.body);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -37,7 +38,7 @@ exports.updateOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body.data);
+    const doc = await Model.create(req.body);
 
     res.status(201).json({
       status: "successful",
@@ -69,7 +70,7 @@ exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // to allow for nested GET reviews on tour
     let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
+    if (req.params.tourId) filter = { resource: req.params.resouceId };
 
     // EXECUTE QUERY
     const features = new APIFeatures(Model.find(filter), req.query)

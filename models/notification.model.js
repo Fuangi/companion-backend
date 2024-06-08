@@ -1,15 +1,20 @@
 const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema({
-  message: {
+  title: {
     type: String,
     required: true,
   },
+  description: String,
   schedule: {
-    type: String,
+    type: Date,
     required: true,
   },
-  active: Boolean, //to store it will be true if uer has it on or false otherwise
+  frequency: {
+    String,
+    enum: ["daily", "weekly", "monthly"],
+  },
+  userId: mongoose.Schema.Types.ObjectId,
   lastSent: Date,
 });
 

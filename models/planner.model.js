@@ -14,14 +14,31 @@ const plannerSchema = new mongoose.Schema({
     enum: ["class", "study", "assignment", "rest", "other"],
   },
   eventStart: {
-    type: Date,
-    default: Date.now().toLocaleString(),
+    type: Number,
     required: [true, "You must provide a start time for the event"],
   },
   eventEnd: {
-    type: Date,
+    type: Number,
     required: [true, "You must provide an end time for the event"],
   },
+  updatedAt: Date,
+  isCompleted: {
+    type: Boolean,
+    default: false,
+    select: false,
+  },
+});
+
+// Middlewares
+// to check if the document has been modified and save the date and time it was changed
+plannerSchema.pre("save", function (next) {
+  if (!this.isModified || this.isNew) return next();
+  // check and skip if the document is just created or has not been modified
+
+  //save the date and time now if it has been modified
+  this.updatedAt = Date.now() - 1000;
+
+  next();
 });
 
 const Planner = mongoose.model("Planner", plannerSchema);

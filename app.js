@@ -6,11 +6,11 @@ const cookieParser = require("cookie-parser");
 
 // Routes handlers
 const userRouter = require("./routes/user.routes");
-const resourceRouter = require("./routes/resource.routes");
-const forumRouter = require("./routes/forum.routes");
+const groupRouter = require("./routes/group.routes");
 const plannerRouter = require("./routes/planner.routes");
 const goalRouter = require("./routes/goal.routes");
 const notifRouter = require("./routes/notification.routes");
+const messageRouter = require("./routes/message.routes");
 
 // Utilities
 const AppError = require("./utils/appError");
@@ -44,11 +44,11 @@ app.use(cookieParser());
 
 // ROUTES
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/forums", forumRouter);
+app.use("/api/v1/groups", groupRouter);
 app.use("/api/v1/plans", plannerRouter);
-app.use("/api/v1/resources", resourceRouter);
 app.use("/api/v1/goals", goalRouter);
 app.use("/api/v1/notifications", notifRouter);
+app.use("/api/v1/messages", messageRouter);
 
 // Handline unhandled routes
 app.all("*", (req, res, next) => {
