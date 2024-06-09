@@ -35,6 +35,7 @@ io.on("connection", (socket) => {
   socket.on("joinGroup", ({ groupId, userId }) => {
     socket.join(groupId);
     io.to(groupId).emit("userJoined", userId);
+    console.log("User joined group");
   });
 
   // When a user leaves a group, we emit this event
@@ -51,6 +52,7 @@ io.on("connection", (socket) => {
       message,
       timeStamp: new Date(),
     });
+    console.log("User sent a message");
 
     io.to(groupId).emit("receiveMessage", newMsg);
   });
