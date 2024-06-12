@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://companion-backend.onrender.com",
+    origin: "https://student-companion-theta.vercel.app",
     method: "POST PATCH GET DELETE",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
