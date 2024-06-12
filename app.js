@@ -55,4 +55,11 @@ app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
+app.get("/", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "Welcome to Companion API",
+  });
+});
+
 module.exports = app;
