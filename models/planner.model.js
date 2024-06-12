@@ -21,10 +21,6 @@ const plannerSchema = new mongoose.Schema({
     type: Number,
     required: [true, "You must provide an end time for the event"],
   },
-  userId: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-  },
   updatedAt: Date,
   isCompleted: {
     type: Boolean,
