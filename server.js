@@ -23,7 +23,8 @@ mongoose.connect(DB).then((con) => {
 // Connecting to socket.io
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
+    origin: "https://student-companion-theta.vercel.app",
     methods: ["GET", "POST", "PATCH", "DELETE"],
   },
 });
