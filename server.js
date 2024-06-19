@@ -16,7 +16,7 @@ const server = http.createServer(app); //create http server
 // Connecting to the database
 const DB = "mongodb://127.0.0.1:27017/companion";
 
-mongoose.connect(DB).then((con) => {
+mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
   console.log("Database connection successful");
 });
 
