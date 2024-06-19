@@ -29,13 +29,19 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("A user connected to socket.io");
+  console.log("A user connected to socket.io", socket.id);
 
   // When a user joins a group, we emit this event
-  socket.on("joinGroup", ({ groupId, userId }) => {
+  socket.on("joinGroup", async ({ groupId, userId }) => {
+    console.log(groupId, userId);
     socket.join(groupId);
     io.to(groupId).emit("userJoined", userId);
-    console.log("User joined group");
+
+    // Update the group's members array in the database
+    const newUser = await Group.findByIdAndUpdate(
+      groupId,
+      { $addToSet: { members: userId } } // $addToSet ensures no duplicates
+    );
   });
 
   // When a user leaves a group, we emit this event
@@ -52,9 +58,8 @@ io.on("connection", (socket) => {
       message,
       timeStamp: new Date(),
     });
-    console.log("User sent a message");
-
     io.to(groupId).emit("receiveMessage", newMsg);
+    console.log("sent");
   });
 
   // When a user is typing a message
@@ -69,7 +74,7 @@ io.on("connection", (socket) => {
 
   // when a user disconnects - is offline
   socket.on("disconnect", () => {
-    console.log("A user disconnected");
+    console.log("A user disconnected", socket.id);
   });
 });
 
