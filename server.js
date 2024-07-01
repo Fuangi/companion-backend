@@ -15,16 +15,17 @@ const server = http.createServer(app); //create http server
 
 // Connecting to the database
 const DB = "mongodb://127.0.0.1:27017/companion";
+// const mainDB =  process.env.DATABASE_LOCAL
 
-mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
+mongoose.connect(DB).then((con) => {
   console.log("Database connection successful");
 });
 
 // Connecting to socket.io
 const io = new Server(server, {
   cors: {
-    // origin: "http://localhost:3000",
-    origin: "https://student-companion-theta.vercel.app",
+    origin: "http://localhost:3000",
+    // origin: "https://student-companion-theta.vercel.app",
     methods: ["GET", "POST", "PATCH", "DELETE"],
   },
 });
