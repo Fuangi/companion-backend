@@ -35,15 +35,15 @@ io.on("connection", (socket) => {
 
   // When a user joins a group, we emit this event
   socket.on("joinGroup", async ({ groupId, userId }) => {
-    console.log(groupId, userId);
     socket.join(groupId);
+    console.log("User joined group");
     io.to(groupId).emit("userJoined", userId);
 
     // Update the group's members array in the database
-    const newUser = await Group.findByIdAndUpdate(
+    /*  const newUser = await Group.findByIdAndUpdate(
       groupId,
       { $addToSet: { members: userId } } // $addToSet ensures no duplicates
-    );
+    ); */
   });
 
   // When a user leaves a group, we emit this event
@@ -54,13 +54,7 @@ io.on("connection", (socket) => {
 
   // when a user sends a message
   socket.on("sendMessage", async ({ groupId, userId, message }) => {
-    const newMsg = await Message.create({
-      groupId,
-      userId,
-      message,
-      timeStamp: new Date(),
-    });
-    io.to(groupId).emit("receiveMessage", newMsg);
+    io.to(groupId).emit("receiveMessage", message);
     console.log("sent");
   });
 
