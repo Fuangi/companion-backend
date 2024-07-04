@@ -5,6 +5,8 @@ const groupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: { type: String, required: true },
+  admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   createdAt: Date,
 });

@@ -36,8 +36,9 @@ io.on("connection", (socket) => {
   // When a user joins a group, we emit this event
   socket.on("joinGroup", async ({ groupId, userId }) => {
     socket.join(groupId);
-    console.log("User joined group");
+    console.log("User joined group", groupId);
     io.to(groupId).emit("userJoined", userId);
+    // io.to(groupId).emit("userJoined", userId);
 
     // Update the group's members array in the database
     /*  const newUser = await Group.findByIdAndUpdate(
@@ -53,18 +54,20 @@ io.on("connection", (socket) => {
   });
 
   // when a user sends a message
-  socket.on("sendMessage", async ({ groupId, userId, message }) => {
-    io.to(groupId).emit("receiveMessage", message);
-    console.log("sent");
+  socket.on("sendMessage", async (msgData) => {
+    io.to(msgData.group).emit("receiveMessage", msgData);
+    console.log("sent", msgData);
   });
 
   // When a user is typing a message
   socket.on("typing", ({ groupId, userId }) => {
+    // console.log(`${userId} typing ${groupId}`);
     io.to(groupId).emit("typing", userId);
   });
 
   // When a user stops typing
   socket.on("stopTyping", ({ groupId, userId }) => {
+    // console.log(`${userId} stopped typing ${groupId}`);
     io.to(groupId).emit("stopTyping", userId);
   });
 
