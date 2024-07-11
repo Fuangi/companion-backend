@@ -56,7 +56,6 @@ io.on("connection", (socket) => {
   // when a user sends a message
   socket.on("sendMessage", async (msgData) => {
     io.to(msgData.group).emit("receiveMessage", msgData);
-    console.log("sent", msgData);
   });
 
   // When a user is typing a message

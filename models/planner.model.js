@@ -27,6 +27,7 @@ const plannerSchema = new mongoose.Schema({
     default: false,
     select: false,
   },
+  userId: mongoose.Schema.Types.ObjectId,
 });
 
 // Middlewares
