@@ -11,6 +11,7 @@ const plannerRouter = require("./routes/planner.routes");
 const goalRouter = require("./routes/goal.routes");
 const notifRouter = require("./routes/notification.routes");
 const messageRouter = require("./routes/message.routes");
+const timetableRouter = require("./routes/timetable.routes");
 
 // Utilities
 const AppError = require("./utils/appError");
@@ -50,6 +51,7 @@ app.use("/api/v1/plans", plannerRouter);
 app.use("/api/v1/goals", goalRouter);
 app.use("/api/v1/notifications", notifRouter);
 app.use("/api/v1/messages", messageRouter);
+app.use("/api/v1/timetable", timetableRouter);
 
 // Handline unhandled routes
 app.all("*", (req, res, next) => {
