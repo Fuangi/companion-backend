@@ -5,7 +5,7 @@ exports.createTimetable = async (req, res, next) => {
     const timetable = new Timetable();
 
     await timetable.save();
-    res.status(200).json({
+    res.status(201).json({
       timetable: timetable.timetable,
     });
   } catch (error) {
@@ -18,6 +18,7 @@ exports.getAllTimetables = async (req, res, next) => {
     const timetables = await Timetable.find();
 
     res.status(200).json({
+      status: "success",
       timetables: timetables,
     });
   } catch (error) {
@@ -28,7 +29,6 @@ exports.getTimetable = async (req, res, next) => {
   console.log(req.params);
   try {
     const timetable = await Timetable.findById(req.params.id);
-    console.log(timetable);
 
     res.status(200).json({
       timetable: timetable,
