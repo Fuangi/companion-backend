@@ -24,8 +24,6 @@ const plannerSchema = new mongoose.Schema({
   updatedAt: Date,
   isCompleted: {
     type: Boolean,
-    default: false,
-    select: false,
   },
   userId: mongoose.Schema.Types.ObjectId,
 });
