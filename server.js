@@ -14,10 +14,10 @@ const app = require("./app");
 const server = http.createServer(app); //create http server
 
 // Connecting to the database
-const DB = "mongodb://127.0.0.1:27017/companion";
-// const mainDB =  process.env.DATABASE_LOCAL
+// const DB = "mongodb://127.0.0.1:27017/companion";
+const mainDB = process.env.DATABASE_LOCAL;
 
-mongoose.connect(DB).then((con) => {
+mongoose.connect(mainDB).then((con) => {
   console.log("Database connection successful");
 });
 
